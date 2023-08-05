@@ -11,8 +11,84 @@ function initMap() {
     mapTypeControl: false,
   });
 
+  let markers=[];
+
 
   infoWindow = new google.maps.InfoWindow();
+
+
+
+          // Create a button to trigger the nearby restaurant search
+          const searchButton = document.createElement("button");
+          searchButton.textContent = "Search Nearby Restaurants";
+          searchButton.classList.add("custom-map-control-button");
+          map.controls[google.maps.ControlPosition.LEFT_CENTER].push(searchButton);
+          searchButton.addEventListener("click", () => {
+            searchNearbyRestaurants();
+          });
+        
+      
+          function searchNearbyRestaurants() {
+
+            clearMarkers();  
+            
+            if (navigator.geolocation) {
+              navigator.geolocation.getCurrentPosition(
+                (position) => {
+                  const pos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude,
+                  };
+        
+                  const service = new google.maps.places.PlacesService(map);
+                  service.nearbySearch(
+                    {
+                      location: pos,
+                      radius: 5500, // You can adjust the radius as needed
+                      type: ["restaurant"],
+                    },
+                    (results, status) => {
+                      if (status === google.maps.places.PlacesServiceStatus.OK) {
+                        for (let i = 0; i < results.length; i++) {
+                          createMarker(results[i]);
+                          console.log(results[i]);
+                        }
+                      }
+                    }
+                  );
+                },
+                () => {
+                  handleLocationError(true, infoWindow, map.getCenter());
+                }
+              );
+            } else {
+              // Browser doesn't support Geolocation
+              handleLocationError(false, infoWindow, map.getCenter());
+            }
+          }
+
+          function createMarker(place) {
+            var placeLoc = place.geometry.location;
+            
+            var marker = new google.maps.Marker({
+                map : map,
+                position : place.geometry.location
+            });
+            markers.push(marker);
+
+            google.maps.event.addListener(marker, 'click', function() {
+                infowindow.setContent(place.name);
+                infowindow.open(map, this);
+            });
+        }
+
+        function clearMarkers(){
+          for (let i = 0; i < markers.length; i++) {
+            markers[i].setMap(null);
+            markers=[];
+          }
+        }
+
 
   const locationButton = document.createElement("button");
 
@@ -53,10 +129,6 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   );
   infoWindow.open(map);
 }
-
-
-
-
 
 
   const card = document.getElementById("pac-card");
@@ -159,7 +231,13 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 
     input.value = "";
   });
-}
+  }
+
+
+
+
+
+
 
 window.initMap = initMap;
 
@@ -169,4 +247,3 @@ window.initMap = initMap;
 // locate you.
 let map, infoWindow;
 
-;
