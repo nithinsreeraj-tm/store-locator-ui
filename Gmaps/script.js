@@ -1,19 +1,18 @@
-// This example requires the Places library. Include the libraries=places
-// parameter when you first load the API. For example:
-// <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
 
 
 let searchradius=5000;
-let category="store";
+let category="restaurant";
 
 function changeRadius(){
   searchradius=document.getElementById("radius").value;
+  
 }
 
 function changeCat(){
   category=document.getElementById("category").value;
 }
+
 
 
 
@@ -28,15 +27,19 @@ function initMap() {
     let selectedpos;
 
 
+
+
+
+
     infoWindow = new google.maps.InfoWindow();
 
 
 
-            // Create a button to trigger the nearby restaurant search
+
             const searchButton = document.createElement("button");
-            searchButton.textContent = "Search Nearby Restaurants";
+            searchButton.textContent = "Search Nearby";
             searchButton.classList.add("custom-map-control-button");
-            map.controls[google.maps.ControlPosition.LEFT_CENTER].push(searchButton);
+            document.getElementById("shops").appendChild(searchButton);
             searchButton.addEventListener("click", () => {
               searchNearbyRestaurants();
             });
@@ -46,19 +49,13 @@ function initMap() {
 
               clearMarkers();  
               
-              // if (navigator.geolocation) {
-              //   navigator.geolocation.getCurrentPosition(
-              //     (position) => {
-              //       const pos = {
-              //         lat: position.coords.latitude,
-              //         lng: position.coords.longitude,
-              //       };
+
           
                     const service = new google.maps.places.PlacesService(map);
                     service.nearbySearch(
                       {
                         location: selectedpos,
-                        radius: searchradius, // You can adjust the radius as needed
+                        radius: searchradius, 
                         type: [category],
                       },
                       (results, status) => {
@@ -70,15 +67,7 @@ function initMap() {
                         }
                       }
                     );
-                //   },
-                //   () => {
-                //     handleLocationError(true, infoWindow, map.getCenter());
-                //   }
-                // );
-              // } else {
-              //   // Browser doesn't support Geolocation
-              //   handleLocationError(false, infoWindow, map.getCenter());
-              // }
+
             }
 
             function createMarker(place) {
@@ -108,11 +97,11 @@ function initMap() {
 
     const locationButton = document.createElement("button");
   
-    locationButton.textContent = "Pan to Current Location";
+    locationButton.textContent = "Locate Me";
     locationButton.classList.add("custom-map-control-button");
-    map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
+    document.getElementById("shops").appendChild(locationButton);
     locationButton.addEventListener("click", () => {
-      // Try HTML5 geolocation.
+
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
           (position) => {
@@ -133,7 +122,6 @@ function initMap() {
           },
         );
       } else {
-        // Browser doesn't support Geolocation
         handleLocationError(false, infoWindow, map.getCenter());
       }
     });
@@ -162,9 +150,7 @@ function initMap() {
   
     const autocomplete = new google.maps.places.Autocomplete(input, options);
   
-    // Bind the map's bounds (viewport) property to the autocomplete object,
-    // so that the autocomplete requests use the current map bounds for the
-    // bounds option in the request.
+
     autocomplete.bindTo("bounds", map);
   
     const infowindow = new google.maps.InfoWindow();
@@ -185,13 +171,11 @@ function initMap() {
       selectedpos=place.geometry.location;
   
       if (!place.geometry || !place.geometry.location) {
-        // User entered the name of a Place that was not suggested and
-        // pressed the Enter key, or the Place Details request failed.
+
         window.alert("No details available for input: '" + place.name + "'");
         return;
       }
-  
-      // If the place has a geometry, then present it on a map.
+
       if (place.geometry.viewport) {
         map.fitBounds(place.geometry.viewport);
       } else {
@@ -207,8 +191,7 @@ function initMap() {
       infowindow.open(map, marker);
     });
   
-    // Sets a listener on a radio button to change the filter type on Places
-    // Autocomplete.
+
     function setupClickListener(id, types) {
       const radioButton = document.getElementById(id);
   
@@ -228,10 +211,7 @@ function initMap() {
       if (biasInputElement.checked) {
         autocomplete.bindTo("bounds", map);
       } else {
-        // User wants to turn off location bias, so three things need to happen:
-        // 1. Unbind from map
-        // 2. Reset the bounds to whole world
-        // 3. Uncheck the strict bounds checkbox UI (which also disables strict bounds)
+
         autocomplete.unbind("bounds");
         autocomplete.setBounds({ east: 180, west: -180, north: 90, south: -90 });
         strictBoundsInputElement.checked = biasInputElement.checked;
@@ -260,10 +240,6 @@ function initMap() {
   
   window.initMap = initMap;
 
-  // Note: This example requires that you consent to location sharing when
-// prompted by your browser. If you see the error "The Geolocation service
-// failed.", it means you probably did not give permission for the browser to
-// locate you.
-let map, infoWindow;
 
+let map, infoWindow;
 

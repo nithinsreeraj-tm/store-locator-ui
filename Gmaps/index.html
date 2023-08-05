@@ -1,25 +1,18 @@
 <!doctype html>
-<!--
- @license
- Copyright 2019 Google LLC. All Rights Reserved.
- SPDX-License-Identifier: Apache-2.0
--->
+
 <html>
   <head>
     <title>Place Autocomplete</title>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <link href="style.css" rel="stylesheet">
-    <!-- jsFiddle will insert css and js -->
+
   </head>
   <body>
+    <div class="header">
+      <h2>Locator Hub</h2>
+    </div>
     <div class="pac-card" id="pac-card">
-      <div>
-        <div id="title">Autocomplete search</div>
 
-      </div>
-      <div id="pac-container">
-        <input id="pac-input" type="text" placeholder="Enter a location" />
-      </div>
     </div>
     <div id="map"></div>
     <div id="infowindow-content">
@@ -28,16 +21,48 @@
     </div>
 
 
-    <!-- 
-      The `defer` attribute causes the callback to execute after the full HTML
-      document has been parsed. For non-blocking uses, avoiding race conditions,
-      and consistent behavior across browsers, consider loading using Promises.
-      See https://developers.google.com/maps/documentation/javascript/load-maps-js-api
-      for more information.
-      -->
     <script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfhbyZ3GY51xIv2f44NH0U9ftjMkrQ45U&callback=initMap&libraries=places&v=weekly"
       defer></script>
     <script src="script.js"></script>
+    <div class="outer-div">
+    <div class="card">
+
+        <div id="pac-container">
+          <input id="pac-input" type="text" placeholder="Search for any store" />
+        </div>
+
+
+      <div id="shops">
+      </div>
+      <div class="list">
+
+        <select name ="Radius" id="radius" onchange="changeRadius()">
+            <option value=5000>5 miles</option>
+            <option value=10000>10 miles</option>
+            <option value=15000>15 miles</option>
+            <option value=20000>20 miles</option>
+          </select>
+          <select name ="Categories" id="categories" onchange="changeCat()">
+            <option value="store">Store</option>
+            <option value="restaurant">Restaurant</option>
+
+          </select>
+
+      </div>
+    </div>
+
+
+
+
+<div class="fav-card">
+  <figure><a href="https://www.google.com/maps/search/Kunnil+Hyper+Market+++Thiruvananthapuram,+Kerala/@8.529661,76.8451487,13z/data=!3m1!4b1?entry=ttu"><img src="./images/download (2).jpeg"  width="200" height="200"></a></figure>
+  <figure><a href="https://www.google.com/maps/place/Lulu+Hypermarket+Thiruvananthapuram/@8.6955785,76.6114397,11z/data=!4m10!1m2!2m1!1sLulu+Hypermarket!3m6!1s0x3b05bd1374902d43:0x7450b368e2386d1b!8m2!3d8.5160704!4d76.897221!15sChBMdWx1IEh5cGVybWFya2V0IgOIAQFaEiIQbHVsdSBoeXBlcm1hcmtldJIBC2h5cGVybWFya2V0mgEkQ2hkRFNVaE5NRzluUzBWSlEwRm5TVVJTWDNCRVVUZFJSUkFC4AEA!16s%2Fg%2F11sh4sbyz0?entry=ttu"><img src="./images/image_2023_08_05T09_55_50_669Z.png"  width="200"  height="200"></a></figure>
+  <figure><a href="https://www.google.com/maps/place/Lulu+Fashion+Store/@8.5153621,76.895117,17z/data=!3m1!4b1!4m6!3m5!1s0x3b05bd95e70d0c39:0x6c9a5acd8e7e82c7!8m2!3d8.5153621!4d76.8976919!16s%2Fg%2F11pkjl_ch3?entry=ttu"><img src="./images/image_2023_08_05T09_56_43_964Z.png"  width="200" height="200"></a></figure>
+  <figure><a href="https://www.google.com/maps/place/Ambrosia/@8.5517278,76.8745537,17z/data=!3m1!4b1!4m6!3m5!1s0x3b05bef6cf1137b5:0x642648bdc6b43037!8m2!3d8.5517278!4d76.8771286!16s%2Fg%2F123382102?entry=ttu"><img src="./images/image_2023_08_05T09_58_51_881Z.png" width="200" height="200"></a></figure>
+  <figure><a href="https://www.google.com/maps/dir//swargalokam+cafe/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x3b05bf5b19192487:0x5b21b84a0c64ae40?sa=X&ved=2ahUKEwjQi9SJocWAAxWvcGwGHVzkApwQ9Rd6BAg4EAA&ved=2ahUKEwjQi9SJocWAAxWvcGwGHVzkApwQ9Rd6BAhCEAQ"><img src="./images/image_2023_08_05T09_59_37_770Z (1).png" width="200" height="200"></a></figure>
+ <figure><a href="https://www.google.com/maps/dir//zam+zam+bun+cafe+trivandrum/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x3b05bbda839dcf71:0x98b2eb29a56f2dc3?sa=X&ved=2ahUKEwjH_9DVocWAAxUYm1YBHe29DFAQ9Rd6BAhQEAA&ved=2ahUKEwjH_9DVocWAAxUYm1YBHe29DFAQ9Rd6BAhdEAU"><img src="./images/image_2023_08_05T10_02_29_530Z.png" width="200" height="200"></a></figure>
+
+</div>
   </body>
 </html>

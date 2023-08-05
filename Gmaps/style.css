@@ -1,94 +1,234 @@
-/**
- * @license
- * Copyright 2019 Google LLC. All Rights Reserved.
- * SPDX-License-Identifier: Apache-2.0
- */
-/* 
- * Always set the map height explicitly to define the size of the div element
- * that contains the map. 
- */
- #map {
-    height: 100%;
-  }
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins&family=Space+Mono&display=swap');
+
+*{
+
+  font-family: 'Poppins', sans-serif;
+  box-sizing: border-box;
   
-  /* 
-   * Optional: Makes the sample page fill the window. 
-   */
-  html,
-  body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-  }
-  
-  #description {
-    font-family: Roboto;
-    font-size: 15px;
-    font-weight: 300;
-  }
-  
-  #infowindow-content .title {
-    font-weight: bold;
-  }
-  
-  #infowindow-content {
-    display: none;
-  }
-  
-  #map #infowindow-content {
-    display: inline;
-  }
-  
-  .pac-card {
-    background-color: #fff;
-    border: 0;
-    border-radius: 2px;
-    box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.3);
-    margin: 10px;
-    padding: 0 0.5em;
-    font: 400 18px Roboto, Arial, sans-serif;
-    overflow: hidden;
-    font-family: Roboto;
-    padding: 0;
-  }
-  
-  #pac-container {
-    padding-bottom: 12px;
-    margin-right: 12px;
-  }
-  
-  .pac-controls {
-    display: inline-block;
-    padding: 5px 11px;
-  }
-  
-  .pac-controls label {
-    font-family: Roboto;
-    font-size: 13px;
-    font-weight: 300;
-  }
-  
-  #pac-input {
-    background-color: #fff;
-    font-family: Roboto;
-    font-size: 15px;
-    font-weight: 300;
-    margin-left: 12px;
-    padding: 0 11px 0 13px;
-    text-overflow: ellipsis;
-    width: 400px;
-  }
-  
-  #pac-input:focus {
-    border-color: #4d90fe;
-  }
-  
-  #title {
-    color: #fff;
-    background-color: #4d90fe;
-    font-size: 25px;
-    font-weight: 500;
-    padding: 6px 12px;
-  }
-  
-  
+}
+
+::-webkit-input-placeholder {
+ font-style: italic;
+}
+:-moz-placeholder {
+ font-style: italic;  
+}
+::-moz-placeholder {
+ font-style: italic;  
+}
+:-ms-input-placeholder {  
+ font-style: italic; 
+}
+
+
+.header{
+ height:100px;
+ margin-left:30px;
+ margin-top:20px;
+}
+
+
+#map {
+   height: 75%;
+   margin-bottom:40px;
+ }
+ 
+
+ .card {
+   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+   transition: 0.3s;
+   width: 55%;
+   height: 300px;
+   margin-left:20px;
+   border-radius:10px;
+   background-color: #6975a5;
+   margin:0 auto;
+
+ }
+.search-store{
+ padding-top:26px;
+ margin-left:40px;
+ font-size: 20px;
+ 
+}
+.search{
+ text-align: center;
+}
+
+.or{
+ text-align: center;
+}
+.list{
+ margin-top:32px;
+ text-align: center;
+}
+.list ul{
+   display:flex;
+   list-style-type:none;
+   justify-content: space-evenly;
+   padding:0;
+}
+
+.shops{
+ text-align: center;
+}
+
+.shops button{
+ border-radius:8px;
+   background-color: #7f8cc0;
+
+ width:250px;
+ height:37px;
+}
+
+
+.content {
+ position: absolute;
+ top: 50%;
+ left: 50%;
+ transform: translate(-50%, -50%);
+ width: 500px;
+ height: 200px;
+ text-align: center;
+ background-color: #a8b5e9;
+ box-sizing: border-box;
+ padding: 10px;
+ z-index: 100;
+ display: none;
+ /*to hide popup initially*/
+}
+
+.close-btn {
+ position: absolute;
+ right: 20px;
+ top: 15px;
+ background-color: black;
+ color: white;
+ border-radius: 50%;
+ padding: 4px;
+}
+
+ html,
+ body {
+   height: 100%;
+   margin: 0;
+   padding: 0;
+ }
+ 
+ #description {
+   font-family: Roboto;
+   font-size: 15px;
+   font-weight: 300;
+ }
+ 
+ #infowindow-content .title {
+   font-weight: bold;
+ }
+ 
+ #infowindow-content {
+   display: none;
+ }
+ 
+ #map #infowindow-content {
+   display: inline;
+ }
+ 
+ .pac-card {
+   background-color: #fff;
+   border: 0;
+   border-radius: 2px;
+   box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.3);
+   margin: 10px;
+   padding: 0 0.5em;
+   font: 400 18px Roboto, Arial, sans-serif;
+   overflow: hidden;
+   font-family: Roboto;
+   padding: 0;
+ }
+ 
+ #pac-container {
+   padding-bottom: 12px;
+   text-align: center; 
+ }
+ 
+ .pac-controls {
+   display: inline-block;
+   padding: 5px 11px;
+ }
+ 
+ .pac-controls label {
+   font-family: Roboto;
+   font-size: 13px;
+   font-weight: 300;
+ }
+ 
+ #pac-input {
+   background-color: #fff;
+   font-family: Roboto;
+   font-size: 15px;
+   font-weight: 300;
+   margin-left: 12px;
+   padding: 0 11px 0 13px;
+   text-overflow: ellipsis;
+   width: 400px;
+   margin-top:48px;
+   border-radius: 35px;
+   width:675px;
+   height:55px;
+   border:none;
+ }
+ 
+ #pac-input:focus {
+   border-color: #4d90fe;
+ }
+ 
+ #title {
+   color: #fff;
+   background-color: #4d90fe;
+   font-size: 25px;
+   font-weight: 500;
+   padding: 6px 12px;
+ }
+ 
+ .custom-map-control-button{
+   border-radius:25px;
+   background-color: #99a2c9;;
+   width:250px;
+   height:37px;
+   margin: 0 auto;
+   border: none;
+   margin: 10px;
+   cursor: pointer;
+ }
+
+ .custom-map-control-button:hover{
+   background-color: #abb8eb;
+
+ }
+
+ #shops{
+   margin: 0 auto;
+   text-align: center;
+ }
+
+ select{
+   padding: 10px;
+   border-radius: 25px;
+   width: 45%;
+ }
+
+ .fav-card{
+   display: flex;
+   flex-wrap: wrap;
+   flex-direction: row;
+   width: 51%;
+   margin: 0 auto;
+   justify-content: center;
+}
+
+h2{
+ display: inline-block;
+}
